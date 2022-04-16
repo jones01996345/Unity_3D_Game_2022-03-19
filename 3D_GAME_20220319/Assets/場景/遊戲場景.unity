@@ -326,7 +326,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 0.3
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -6174,6 +6174,8 @@ MonoBehaviour:
   goWeaponBack: {fileID: 874840687}
   goWeaponHand: {fileID: 1880467272}
   psLight: {fileID: 117097087}
+  timeSwordToBack: 2.5
+  timeSwordToHide: 3.5
 --- !u!1 &1865153786
 GameObject:
   m_ObjectHideFlags: 0
