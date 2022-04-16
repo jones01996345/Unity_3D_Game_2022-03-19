@@ -6176,6 +6176,12 @@ MonoBehaviour:
   psLight: {fileID: 117097087}
   timeSwordToBack: 2.5
   timeSwordToHide: 3.5
+  timeCD: 1.1
+  v3AttacksSize: {x: 1, y: 1, z: 1}
+  v3AttackOffset: {x: 0, y: 0.8, z: 0.8}
+  layerAttack:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1865153786
 GameObject:
   m_ObjectHideFlags: 0

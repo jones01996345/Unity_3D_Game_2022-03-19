@@ -1,4 +1,5 @@
 using UnityEngine;
+using Invector.vCharacterController;
 
 /// <summary>
 /// 命名空間
@@ -28,23 +29,52 @@ namespace Jones
         private float timeSwordToBack=2.5f;
         [SerializeField, Header("第二階段收刀時間")]
         private float timeSwordToHide = 3.5f;
+        [SerializeField, Header("攻擊時間"),Range(0.1f,1.5f)]
+        private float timeCD = 1.1f;
+        [SerializeField, Header("攻擊區資料")]
+        private Vector3 v3AttacksSize = Vector3.one;
+        [SerializeField]
+        private Vector3 v3AttackOffset;
+        [SerializeField]
+        private LayerMask layerAttack;
 
         private string paramateterAttack = "觸發攻擊";
         private bool isAttack;
         private bool isBack;
+        private bool CanAttack=true;
         private float timer;
         private float timerToHide;
+        private float timerAttack;
+        private vThirdPersonController controller;
+
         #endregion
         #region 事件
+        private void OnDrawGizmos()
+        {
+            
+            Gizmos.color = new Color(1, 0, 0, 0.3f);
+            // matrix 設定圖示座標、角度與尺寸
+            // TRS座標、角度與尺寸
+            // transform.TransformDirection(座標)轉換區域座標與世界座標
+            Gizmos.matrix = Matrix4x4.TRS(
+                transform.position + transform.TransformDirection(v3AttackOffset), 
+                transform.rotation, transform.localScale);
+            Gizmos.DrawCube(Vector3.zero, v3AttacksSize);
+        }
+
         private void Awake()
         {
             ani = GetComponent<Animator>();
+            controller = GetComponent<vThirdPersonController>();
+            
         }
+
         private void Update()
         {
             SwitchWeapon();
             SwordToBack();
             SwordToHide();
+            AttackCD();
         }
         #endregion
 
@@ -54,8 +84,11 @@ namespace Jones
         /// </summary>
         private void SwitchWeapon()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0)&&CanAttack)
             {
+                controller.lockMovement = true;                 //鎖定移動
+                controller._rigidbody.velocity = Vector3.zero;
+
                 goWeaponBack.SetActive(false);
                 goWeaponHand.SetActive(true);
 
@@ -64,6 +97,9 @@ namespace Jones
 
                 timer = 0;                              //每次攻擊計時重算
                 isAttack = true;
+                CanAttack = false;
+                timerToHide = 0;
+                isBack = false;
             }
 
         }
@@ -86,6 +122,7 @@ namespace Jones
                 }
             }
         }
+
         /// <summary>
         /// 收刀第二階段:從背後隱藏
         /// </summary>
@@ -98,6 +135,23 @@ namespace Jones
                 {
                     goWeaponBack.SetActive(false);
                     timerToHide = 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 攻擊冷卻
+        /// </summary>
+        private void AttackCD()
+        {
+            if (!CanAttack)
+            {
+                timerAttack += Time.deltaTime;
+                if(timerAttack>=timeCD)
+                {
+                    timerAttack = 0;
+                    CanAttack = true;
+                    controller.lockMovement = false;
                 }
             }
         }
