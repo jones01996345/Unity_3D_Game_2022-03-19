@@ -19,8 +19,8 @@ MonoBehaviour:
   speed: 5
   rangeTrack: 5
   rangeAttack: 2
-  v3AttackOffset: {x: 0, y: 0, z: 0}
-  v3AttackSize: {x: 1, y: 1, z: 1}
+  v3AttackOffset: {x: 0.14, y: 0.76, z: 0.87}
+  v3AttackSize: {x: 0.79, y: 0.75, z: 0.71}
   exp: 20
   goCoin: {fileID: 8148467960052831348, guid: 5eb7f231f26430846b573c8713e32609, type: 3}
   coinCount: 50
