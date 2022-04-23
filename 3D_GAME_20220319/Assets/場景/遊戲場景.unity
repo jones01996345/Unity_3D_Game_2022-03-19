@@ -5275,7 +5275,7 @@ GameObject:
   - component: {fileID: 698930262}
   - component: {fileID: 698930261}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: "\u8840\u91CF"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5320,11 +5320,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: f981fdad814cbfb43969712c51317bae, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -5350,7 +5350,7 @@ GameObject:
   - component: {fileID: 715380992}
   - component: {fileID: 715380991}
   m_Layer: 5
-  m_Name: Text
+  m_Name: "\u7B49\u7D1A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5508,7 +5508,7 @@ GameObject:
   - component: {fileID: 901310992}
   - component: {fileID: 901310991}
   m_Layer: 5
-  m_Name: Image
+  m_Name: "\u8840\u91CF\u5E95\u5716"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5855,7 +5855,7 @@ MonoBehaviour:
   namePlayer: "\u4E3B\u89D2"
   layerTrack:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!135 &1189435296
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5919,7 +5919,7 @@ GameObject:
   - component: {fileID: 1576191109}
   - component: {fileID: 1576191108}
   m_Layer: 5
-  m_Name: Text
+  m_Name: "\u8840\u91CF\u6587\u5B57"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6315,11 +6315,26 @@ MonoBehaviour:
   timeSwordToBack: 2.5
   timeSwordToHide: 3.5
   timeCD: 1.1
-  v3AttacksSize: {x: 1, y: 1, z: 1}
+  v3AttackSize: {x: 1, y: 1, z: 1}
   v3AttackOffset: {x: 0, y: 1, z: 0.6}
   layerAttack:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1856420856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856420848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3feb3b5ddcb5be04b8f376f7df8cb94a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1000
+  textHp: {fileID: 1576191108}
+  imageHp: {fileID: 698930261}
 --- !u!1 &1865153786
 GameObject:
   m_ObjectHideFlags: 0
@@ -6451,7 +6466,7 @@ MonoBehaviour:
   namePlayer: "\u4E3B\u89D2"
   layerTrack:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!195 &1938223304
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6658,6 +6673,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1679e2eb6e9a6344c994a61f31e35389, type: 3}
       propertyPath: m_Name
       value: "\u4E3B\u89D2"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1679e2eb6e9a6344c994a61f31e35389, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4167280743394806330, guid: 1679e2eb6e9a6344c994a61f31e35389, type: 3}
       propertyPath: m_LocalPosition.x

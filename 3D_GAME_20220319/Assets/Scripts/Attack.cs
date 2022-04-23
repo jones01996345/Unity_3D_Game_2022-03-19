@@ -32,7 +32,7 @@ namespace Jones
         [SerializeField, Header("攻擊時間"),Range(0.1f,1.5f)]
         private float timeCD = 1.1f;
         [SerializeField, Header("攻擊區資料")]
-        private Vector3 v3AttacksSize = Vector3.one;
+        private Vector3 v3AttackSize = Vector3.one;
         [SerializeField]
         private Vector3 v3AttackOffset;
         [SerializeField]
@@ -59,7 +59,7 @@ namespace Jones
             Gizmos.matrix = Matrix4x4.TRS(
                 transform.position + transform.TransformDirection(v3AttackOffset), 
                 transform.rotation, transform.localScale);
-            Gizmos.DrawCube(Vector3.zero, v3AttacksSize);
+            Gizmos.DrawCube(Vector3.zero, v3AttackSize);
         }
 
         private void Awake()

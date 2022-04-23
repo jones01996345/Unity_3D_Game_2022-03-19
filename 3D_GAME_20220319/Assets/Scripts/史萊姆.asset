@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   ack: 10
+  cd: 2
+  delaySendDamage: 0.1
   speed: 2
   rangeTrack: 5
   rangeAttack: 1.1
+  v3AttackOffset: {x: 0, y: 0.5, z: 0.9}
+  v3AttackSize: {x: 1, y: 1, z: 0.52}
   exp: 10
   goCoin: {fileID: 8148467960052831348, guid: 5eb7f231f26430846b573c8713e32609, type: 3}
   coinCount: 50
