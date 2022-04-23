@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c0275bccfdf014085cae85ab041388, type: 3}
+  m_Name: "\u5154\u5154"
+  m_EditorClassIdentifier: 
+  hp: 200
+  ack: 20
+  speed: 10
+  rangeTrack: 5
+  rangeAttack: 2.5
+  exp: 20
+  goCoin: {fileID: 8148467960052831348, guid: 5eb7f231f26430846b573c8713e32609, type: 3}
+  coinCount: 50
+  coinProbability: 0.5
