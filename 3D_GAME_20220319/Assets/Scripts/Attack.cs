@@ -19,17 +19,17 @@ namespace Jones
         private Animator ani;
 
         // SerializeField 序列化欄位:將私人欄位顯示屬性面板
-        [SerializeField,Header("武器 背後")]
+        [SerializeField, Header("武器 背後")]
         private GameObject goWeaponBack;
         [SerializeField, Header("武器 手上")]
         private GameObject goWeaponHand;
         [SerializeField, Header("刀光")]
         private ParticleSystem psLight;
-        [SerializeField,Header("第一階段收刀時間")]
-        private float timeSwordToBack=2.5f;
+        [SerializeField, Header("第一階段收刀時間")]
+        private float timeSwordToBack = 2.5f;
         [SerializeField, Header("第二階段收刀時間")]
         private float timeSwordToHide = 3.5f;
-        [SerializeField, Header("攻擊時間"),Range(0.1f,1.5f)]
+        [SerializeField, Header("攻擊時間"), Range(0.1f, 1.5f)]
         private float timeCD = 1.1f;
         [SerializeField, Header("攻擊區資料")]
         private Vector3 v3AttackSize = Vector3.one;
@@ -37,11 +37,13 @@ namespace Jones
         private Vector3 v3AttackOffset;
         [SerializeField]
         private LayerMask layerAttack;
+        [SerializeField, Header("攻擊力"), Range(10, 100)]
+        private float attack = 30;
 
         private string paramateterAttack = "觸發攻擊";
         private bool isAttack;
         private bool isBack;
-        private bool CanAttack=true;
+        private bool CanAttack = true;
         private float timer;
         private float timerToHide;
         private float timerAttack;
@@ -51,13 +53,13 @@ namespace Jones
         #region 事件
         private void OnDrawGizmos()
         {
-            
+
             Gizmos.color = new Color(1, 0, 0, 0.3f);
             // matrix 設定圖示座標、角度與尺寸
             // TRS座標、角度與尺寸
             // transform.TransformDirection(座標)轉換區域座標與世界座標
             Gizmos.matrix = Matrix4x4.TRS(
-                transform.position + transform.TransformDirection(v3AttackOffset), 
+                transform.position + transform.TransformDirection(v3AttackOffset),
                 transform.rotation, transform.localScale);
             Gizmos.DrawCube(Vector3.zero, v3AttackSize);
         }
@@ -66,7 +68,7 @@ namespace Jones
         {
             ani = GetComponent<Animator>();
             controller = GetComponent<vThirdPersonController>();
-            
+
         }
 
         private void Update()
@@ -84,7 +86,7 @@ namespace Jones
         /// </summary>
         private void SwitchWeapon()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0)&&CanAttack)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack)
             {
                 controller.lockMovement = true;                 //鎖定移動
                 controller._rigidbody.velocity = Vector3.zero;
@@ -94,6 +96,7 @@ namespace Jones
 
                 ani.SetTrigger(paramateterAttack);      //觸發攻擊動畫
                 psLight.Play();                         //播放攻擊特效
+                CheckAttackArea();
 
                 timer = 0;                              //每次攻擊計時重算
                 isAttack = true;
@@ -108,10 +111,10 @@ namespace Jones
         /// </summary>
         private void SwordToBack()
         {
-            if(isAttack)
+            if (isAttack)
             {
                 timer += Time.deltaTime;
-                if(timer>=timeSwordToBack)
+                if (timer >= timeSwordToBack)
                 {
                     goWeaponHand.SetActive(false);
                     goWeaponBack.SetActive(true);
@@ -128,10 +131,10 @@ namespace Jones
         /// </summary>
         private void SwordToHide()
         {
-            if(isBack)
+            if (isBack)
             {
                 timerToHide += Time.deltaTime;
-                if(timerToHide>=timeSwordToHide)
+                if (timerToHide >= timeSwordToHide)
                 {
                     goWeaponBack.SetActive(false);
                     timerToHide = 0;
@@ -147,7 +150,7 @@ namespace Jones
             if (!CanAttack)
             {
                 timerAttack += Time.deltaTime;
-                if(timerAttack>=timeCD)
+                if (timerAttack >= timeCD)
                 {
                     timerAttack = 0;
                     CanAttack = true;
@@ -155,8 +158,23 @@ namespace Jones
                 }
             }
         }
+        /// <summary>
+        /// 檢查攻擊區域
+        /// </summary>
+        private void CheckAttackArea()
+        {
+
+            Collider[] hits = Physics.OverlapBox(
+                transform.position + transform.TransformDirection(v3AttackOffset),
+                v3AttackSize / 2, Quaternion.identity, layerAttack);
+            if (hits.Length > 0)
+            {
+                //print("<color=yallow>敵人擊中目標:" + hits[0].name +"</color>");               
+                hits[0].GetComponent<HurtAndDropSystem>().GetHurt(attack);
+            }
+        }
         #endregion
-
-
     }
 }
+         
+
