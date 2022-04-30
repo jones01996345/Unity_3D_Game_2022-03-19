@@ -24,4 +24,4 @@ MonoBehaviour:
   exp: 20
   goCoin: {fileID: 8148467960052831348, guid: 5eb7f231f26430846b573c8713e32609, type: 3}
   coinCount: 50
-  coinProbability: 0.5
+  coinProbability: 0.7

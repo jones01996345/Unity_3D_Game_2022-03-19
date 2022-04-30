@@ -21,6 +21,11 @@ namespace Jones
         private Transform traCamera;
         private NavMeshAgent nav;
         private Enemy enemy;
+        /// <summary>
+        /// 等級管理器
+        /// </summary>
+        private LevelManager levelManager;
+
         // override 復寫父類別有 virtual的資料
         protected override void Awake()
         {
@@ -31,6 +36,8 @@ namespace Jones
             hpMax = date.hp;
             UpdateHealthUI();
             traCamera = GameObject.Find("攝影機").transform;
+
+            levelManager = GameObject.Find("等級管理器").GetComponent<LevelManager>();
 
         }
 
@@ -48,9 +55,13 @@ namespace Jones
 
         protected override void Dead()
         {
+            if (ani.GetBool(parameterDead)) return;
             base.Dead();
             nav.enabled = false;
             enemy.enabled = false;
+
+            levelManager.ShowUI();
+
             StartCoroutine(DropCoin());
         }
         /// <summary>
@@ -64,7 +75,9 @@ namespace Jones
                 for (int i = 0; i < date.coinCount; i++)   //迴圈重複生成道具
                 {
                     Vector3 pos=new Vector3(Random.Range(-1,1),1,Random.Range(-1,1));
-                    Instantiate(date.goCoin, transform.position + pos, Quaternion.Euler(90, Random.Range(0, 360), 0));
+                    //  生成(物件,座標,角度)
+                    GameObject temp= Instantiate(date.goCoin, transform.position + pos, Quaternion.Euler(90, Random.Range(0, 360), 0));
+                    temp.GetComponent<Rigidbody>().AddForce(new Vector3(0, Random.Range(300, 500), 0));
                     yield return new WaitForSeconds(0.1f);
                 }
             }

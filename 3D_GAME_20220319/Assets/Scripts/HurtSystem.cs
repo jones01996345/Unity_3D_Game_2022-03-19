@@ -12,8 +12,9 @@ namespace Jones
         [SerializeField]
         private Image imageHp;
         [SerializeField, Header("死亡動畫參數")]
-        private string parameterDead = "開關死亡";
-        private Animator ani;
+        protected string parameterDead = "開關死亡";
+
+        protected Animator ani;
 
         protected float hpMax;
 
