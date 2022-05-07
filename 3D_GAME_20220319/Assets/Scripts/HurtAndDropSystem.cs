@@ -24,7 +24,12 @@ namespace Jones
         /// <summary>
         /// 等級管理器
         /// </summary>
-        private LevelManager levelManager;
+        //private ShowInfoManager levelManager;
+
+        /// <summary>
+        /// 經驗值管理器
+        /// </summary>
+        private ExpManager expManager;
 
         // override 復寫父類別有 virtual的資料
         protected override void Awake()
@@ -37,7 +42,8 @@ namespace Jones
             UpdateHealthUI();
             traCamera = GameObject.Find("攝影機").transform;
 
-            levelManager = GameObject.Find("等級管理器").GetComponent<LevelManager>();
+            //levelManager = GameObject.Find("等級管理器").GetComponent<ShowInfoManager>();
+            expManager = GameObject.Find("經驗值管理器").GetComponent < ExpManager>();
 
         }
 
@@ -60,7 +66,8 @@ namespace Jones
             nav.enabled = false;
             enemy.enabled = false;
 
-            levelManager.ShowUI();
+            //levelManager.ShowUI();
+            expManager.GetExp(date.exp);
 
             StartCoroutine(DropCoin());
         }
