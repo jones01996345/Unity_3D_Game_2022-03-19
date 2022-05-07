@@ -13,13 +13,17 @@ namespace Jones
         [SerializeField, Header("經驗值需求表資料")]
         private DataExpTable dataExpTable;
         /// <summary>
-        /// 等級
+        /// 玩家等級
         /// </summary>
         private Text textLv;
         /// <summary>
-        /// 血量文字
+        /// 玩家血量文字
         /// </summary>
         private Text textHp;
+        /// <summary>
+        /// 主角
+        /// </summary>
+        private HurtSystem hurtSystemPlayer;
         
 
         /// <summary>
@@ -30,9 +34,10 @@ namespace Jones
         private void Awake()
         {
             showInfoManager = GameObject.Find("顯示資訊管理器").GetComponent<ShowInfoManager>();
-            textLv = GameObject.Find("等級").GetComponent<Text>();
-            textHp = GameObject.Find("血量文字").GetComponent<Text>();
+            textLv = GameObject.Find("玩家等級").GetComponent<Text>();
+            textHp = GameObject.Find("玩家血量文字").GetComponent<Text>();
             UpdatePlayerUI();
+            hurtSystemPlayer.UpdateDataHp(datePlayer.hp);
 
         }
         /// <summary>
@@ -57,7 +62,7 @@ namespace Jones
                 datePlayer.attack += datePlayer.lvUpAttack;
                 datePlayer.hp += datePlayer.lvUpHp;
                 UpdatePlayerUI();
-
+                hurtSystemPlayer.UpdateDataHp(datePlayer.hp);
 
             }
         }

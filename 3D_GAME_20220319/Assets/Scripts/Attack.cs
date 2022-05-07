@@ -37,8 +37,8 @@ namespace Jones
         private Vector3 v3AttackOffset;
         [SerializeField]
         private LayerMask layerAttack;
-        [SerializeField, Header("攻擊力"), Range(10, 100)]
-        private float attack = 30;
+        [SerializeField, Header("玩家資料")]
+        private DatePlayer date;
 
         private string paramateterAttack = "觸發攻擊";
         private bool isAttack;
@@ -170,7 +170,7 @@ namespace Jones
             if (hits.Length > 0)
             {
                 //print("<color=yallow>敵人擊中目標:" + hits[0].name +"</color>");               
-                hits[0].GetComponent<HurtAndDropSystem>().GetHurt(attack);
+                hits[0].GetComponent<HurtAndDropSystem>().GetHurt(date.attack);
             }
         }
         #endregion
